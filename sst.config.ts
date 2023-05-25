@@ -9,6 +9,9 @@ export default {
     };
   },
   stacks(app) {
+    app.setDefaultFunctionProps({
+      runtime: "go1.x",
+    });
     app.stack(API);
   }
 } satisfies SSTConfig;
