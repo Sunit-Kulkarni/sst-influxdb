@@ -7,7 +7,8 @@ export function API({ stack }: StackContext) {
     customDomain: "api-iot-dev.sunitkulkarni.com",
     routes: {
       "GET /": "packages/functions/src/main.go",
-      "POST /sensor": "packages/functions/lambdas/create.go"
+      "POST /sensor": "packages/functions/lambdas/create/create.go",
+      "POST /sensor_batch": "packages/functions/lambdas/batch/batch.go"
     },
     defaults: {
       function: {

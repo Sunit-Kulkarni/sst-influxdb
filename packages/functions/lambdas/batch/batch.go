@@ -11,11 +11,11 @@ import (
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 
-func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+func Batch(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
 	if err := dbWrite(context.Background()); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		return events.APIGatewayProxyResponse{
-			Body:       "Your POST request is invalid:" + err.Error(),
+			Body:       "Your POST batch request is invalid:" + err.Error(),
 			StatusCode: 400,
 		}, nil
 	}
@@ -68,5 +68,5 @@ func dbWrite(ctx context.Context) error {
 }
 
 func main() {
-	lambda.Start(Handler)
+	lambda.Start(Batch)
 }
