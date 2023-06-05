@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
-	"log"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	crdbpgx "github.com/cockroachdb/cockroach-go/v2/crdb/crdbpgxv5"
 
+	"github.com/Sunit-Kulkarni/sst-influxdb/v2/packages/functions/db"
 	"github.com/jackc/pgx/v5"
 )
 
@@ -21,22 +21,8 @@ type MemberRow struct {
 func Get(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
 	memberAliasId := request.PathParameters["id"]
 
-	config, err := pgx.ParseConfig(os.Getenv("DATABASE_URL"))
-	if err != nil {
-		log.Fatal(err)
-		return events.APIGatewayProxyResponse{
-			Body:       "Error parsing connection string:" + err.Error(),
-			StatusCode: 500,
-		}, nil
-	}
-	conn, err := pgx.ConnectConfig(context.Background(), config)
-	if err != nil {
-		log.Fatal(err)
-		return events.APIGatewayProxyResponse{
-			Body:       "Error passing connection config:" + err.Error(),
-			StatusCode: 500,
-		}, nil
-	}
+	dsn := os.Getenv("DATABASE_URL")
+	conn, err := db.CreateCockroachDBConnection(dsn)
 	defer conn.Close(context.Background())
 
 	err = crdbpgx.ExecuteTx(context.Background(), conn, pgx.TxOptions{}, func(tx pgx.Tx) error {
