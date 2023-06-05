@@ -7,7 +7,8 @@ export function API({ stack }: StackContext) {
       "GET /": "packages/functions/src/main.go",
       "POST /sensor": "packages/functions/lambdas/create/create.go",
       "POST /sensor_batch": "packages/functions/lambdas/batch/batch.go",
-      "POST /member": "packages/functions/lambdas/member/create/create.go"
+      "POST /member": "packages/functions/lambdas/member/create/create.go",
+      "GET /member/{id}": "packages/functions/lambdas/member/get/get.go",
     },
     defaults: {
       function: {
