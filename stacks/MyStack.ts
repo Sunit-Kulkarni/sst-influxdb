@@ -1,6 +1,4 @@
-import { HostedZone } from "aws-cdk-lib/aws-route53";
-import { Config, StackContext, Api, use, NextjsSite } from "sst/constructs";
-
+import { StackContext, Api, NextjsSite } from "sst/constructs";
 
 export function API({ stack }: StackContext) {
   const api = new Api(stack, "api", {
