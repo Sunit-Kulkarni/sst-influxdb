@@ -20,7 +20,6 @@ type MemberRow struct {
 
 func Get(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
 	memberAliasId := request.PathParameters["id"]
-	log.Println("The member id: %v\n", memberAliasId)
 
 	config, err := pgx.ParseConfig(os.Getenv("DATABASE_URL"))
 	if err != nil {
@@ -28,7 +27,7 @@ func Get(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse
 		return events.APIGatewayProxyResponse{
 			Body:       "Error parsing connection string:" + err.Error(),
 			StatusCode: 500,
-		}, err
+		}, nil
 	}
 	conn, err := pgx.ConnectConfig(context.Background(), config)
 	if err != nil {
@@ -36,7 +35,7 @@ func Get(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse
 		return events.APIGatewayProxyResponse{
 			Body:       "Error passing connection config:" + err.Error(),
 			StatusCode: 500,
-		}, err
+		}, nil
 	}
 	defer conn.Close(context.Background())
 
@@ -48,7 +47,7 @@ func Get(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse
 		return events.APIGatewayProxyResponse{
 			Body:       "Membership not found:" + err.Error(),
 			StatusCode: 404,
-		}, err
+		}, nil
 	}
 
 	return events.APIGatewayProxyResponse{
@@ -67,7 +66,7 @@ func getRow(ctx context.Context, tx pgx.Tx, memberAliasId string) error {
 		WHERE member_alias_id=($1)`,
 		memberAliasId,
 	)
-	err := row.Scan(&result)
+	err := row.Scan(&result.MemberId, &result.ClubMemberAliasId, &result.FamilyName)
 	if err != nil {
 		return err
 	}
