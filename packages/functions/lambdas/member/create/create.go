@@ -67,7 +67,7 @@ func insertRow(ctx context.Context, tx pgx.Tx, newMemberRequest CreateRequest) e
 	// Insert row into the "members" table.
 	log.Println("Creating new rows...")
 	if _, err := tx.Exec(ctx,
-		`INSERT INTO country_club.members (member_alias_id, family_name) 
+		`INSERT INTO country_club.public.members (member_alias_id, family_name) 
 		VALUES ($1, $2)`,
 		newMemberRequest.ClubMemberId, newMemberRequest.FamilyName,
 	); err != nil {
