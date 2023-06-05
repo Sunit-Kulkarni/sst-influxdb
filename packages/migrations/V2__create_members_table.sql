@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS members
+CREATE TABLE IF NOT EXISTS country_club.members
 (
   member_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   member_alias_id VARCHAR(10) UNIQUE NOT NULL,

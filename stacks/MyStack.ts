@@ -3,7 +3,6 @@ import { Config, StackContext, Api, use, NextjsSite } from "sst/constructs";
 
 
 export function API({ stack }: StackContext) {
-  const INFLUXDB_TOKEN = new Config.Secret(stack, "INFLUXDB_TOKEN");
   const api = new Api(stack, "api", {
     customDomain: "api-iot-dev.sunitkulkarni.com",
     routes: {
@@ -14,7 +13,6 @@ export function API({ stack }: StackContext) {
     },
     defaults: {
       function: {
-        bind: [INFLUXDB_TOKEN],
         environment: {
           INFLUXDB_TOKEN: process.env.INFLUXDB_TOKEN,
           DATABASE_URL: process.env.DATABASE_URL

@@ -13,3 +13,9 @@ node_modules
 
 # local env files
 .env*.local
+.env
+
+# flyway conf and reports
+flyway.conf
+report.html
+report.json
