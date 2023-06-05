@@ -1,4 +1,5 @@
-import { Config, StackContext, Api, use } from "sst/constructs";
+import { HostedZone } from "aws-cdk-lib/aws-route53";
+import { Config, StackContext, Api, use, NextjsSite } from "sst/constructs";
 
 
 export function API({ stack }: StackContext) {
@@ -8,7 +9,8 @@ export function API({ stack }: StackContext) {
     routes: {
       "GET /": "packages/functions/src/main.go",
       "POST /sensor": "packages/functions/lambdas/create/create.go",
-      "POST /sensor_batch": "packages/functions/lambdas/batch/batch.go"
+      "POST /sensor_batch": "packages/functions/lambdas/batch/batch.go",
+      "POST /member": "packages/functions/lambdas/member/create/create.go"
     },
     defaults: {
       function: {
@@ -19,7 +21,15 @@ export function API({ stack }: StackContext) {
       }
     }
   });
+  const site = new NextjsSite(stack, "countryclub", {
+    customDomain: {
+      domainName: "countryclub.sunitkulkarni.com",
+      hostedZone: "sunitkulkarni.com"
+    },
+    path: "packages/web"
+  })
   stack.addOutputs({
     ApiEndpoint: api.url,
+    URL: site.url,
   });
 }
