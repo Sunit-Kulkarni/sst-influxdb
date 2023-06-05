@@ -15,14 +15,21 @@ require (
 	github.com/cdklabs/awscdk-asset-awscli-go/awscliv1/v2 v2.2.177 // indirect
 	github.com/cdklabs/awscdk-asset-kubectl-go/kubectlv20/v2 v2.1.1 // indirect
 	github.com/cdklabs/awscdk-asset-node-proxy-agent-go/nodeproxyagentv5/v2 v2.0.148 // indirect
+	github.com/cockroachdb/cockroach-go/v2 v2.3.4 // indirect
 	github.com/deepmap/oapi-codegen v1.8.2 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/pgx/v5 v5.3.1 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/yuin/goldmark v1.4.13 // indirect
+	golang.org/x/crypto v0.9.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.10.0 // indirect
 	golang.org/x/net v0.10.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
+	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/tools v0.9.1 // indirect
 )

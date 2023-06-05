@@ -16,7 +16,8 @@ export function API({ stack }: StackContext) {
       function: {
         bind: [INFLUXDB_TOKEN],
         environment: {
-          INFLUXDB_TOKEN: process.env.INFLUXDB_TOKEN
+          INFLUXDB_TOKEN: process.env.INFLUXDB_TOKEN,
+          DATABASE_URL: process.env.DATABASE_URL
         }
       }
     }
