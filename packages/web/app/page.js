@@ -1,6 +1,6 @@
 'use client';
 import { useDisclosure } from '@mantine/hooks';
-import { Input, Image, Modal, Grid, SimpleGrid, Box } from "@mantine/core";
+import { Badge , Flex, Input, Image, Modal, Grid, SimpleGrid, Box } from "@mantine/core";
 
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -18,8 +18,14 @@ export default function Home() {
             radius="sm"
           />
         </Grid.Col>
-        <Grid.Col span={6}>
-          asdfasdfasdf
+        <Grid.Col span={6} align='center'>
+          <Badge>VinoBarrel Estate</Badge>
+          <Badge>raspberry</Badge>
+          <Badge>cherry</Badge>
+          <Badge>chocolate</Badge>
+          <Badge>mixed-berry</Badge>
+          <Badge>oak</Badge>
+          <Badge>earthy</Badge>
         </Grid.Col>
       </Grid>
       <Grid align='center'>
@@ -31,8 +37,14 @@ export default function Home() {
             radius="sm"
           />
         </Grid.Col>
-        <Grid.Col span={6}>
-          asdfasdfasdf
+        <Grid.Col span={6} align='center'>
+          <Badge>VinoBarrel Estate</Badge>
+          <Badge>oak</Badge>
+          <Badge>vanilla</Badge>
+          <Badge>tobacco</Badge>
+          <Badge>plum</Badge>
+          <Badge>cherry</Badge>
+          <Badge>dark fruit</Badge>
         </Grid.Col>
       </Grid>
     </div>
