@@ -10,7 +10,7 @@ export default function Home() {
     const res = await fetch(`https://api-iot-dev.sunitkulkarni.com/member/${id}`);
     if (res.status == 200) {
       setPayMessage("Paid!")
-      setTimeout(close, 1000)
+      setTimeout(close, 4000)
      } else {
       setPayMessage("Invalid Member Id!")
       open()
