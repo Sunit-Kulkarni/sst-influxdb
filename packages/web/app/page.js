@@ -1,44 +1,40 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+import { useDisclosure } from '@mantine/hooks';
+import { Input, Image, Modal, Grid, SimpleGrid, Box } from "@mantine/core";
 
 export default function Home() {
+  const [opened, { open, close }] = useDisclosure(false);
   return (
-    <main className={styles.main}>
-
-      <div className={styles.center}>
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src={"/VinoBarrelCabernet.png"}
-              width={208}
-              height={928}
-            />
-            
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src={"/VinoBarrelZinfandel.png"}
-              width={208}
-              height={928}
-            />
-            
-          </a>
-        </div>
-      </div>
-
-    </main>
+    <div>
+      <Modal opened={opened} onClose={close} title="Enter Member ID">
+        <Input />
+      </Modal>
+      <Grid align='center'>
+        <Grid.Col span={6}>
+          <Image
+            src={"/VinoBarrelCabernet.png"}
+            maw={140}
+            mx="auto"
+            radius="sm"
+          />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          asdfasdfasdf
+        </Grid.Col>
+      </Grid>
+      <Grid align='center'>
+        <Grid.Col span={6}>
+          <Image
+            src={"/VinoBarrelZinfandel.png"}
+            maw={140}
+            mx="auto"
+            radius="sm"
+          />
+        </Grid.Col>
+        <Grid.Col span={6}>
+          asdfasdfasdf
+        </Grid.Col>
+      </Grid>
+    </div>
   )
 }
