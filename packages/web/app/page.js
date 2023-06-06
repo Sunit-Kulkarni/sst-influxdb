@@ -5,7 +5,6 @@ import { Badge , Button, Input, Image, Modal, Grid, TextInput } from "@mantine/c
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
   const [memberId, setMemberId] = useInputState('')
-  // const [paid, setPaid] = useSetState(false)
   const [payMessage, setPayMessage] = useInputState('')
   const fetchUser = async (id) => {
     const res = await fetch(`https://api-iot-dev.sunitkulkarni.com/member/${id}`);
