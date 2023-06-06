@@ -57,9 +57,9 @@ export default function Home() {
           <br />
           <br />
           <br />
-          <Button onClick={open} radius={'xl'} size={'md'}>Single Pour $1.00</Button>
+          <Button onClick={open} radius={'xl'} size={'md'}>2 oz for $5.00</Button>
           <>&nbsp;&nbsp;&nbsp;&nbsp;</>
-          <Button onClick={open} radius={'xl'} size={'md'}>Double Pour $2.00</Button>
+          <Button onClick={open} radius={'xl'} size={'md'}>7 oz for $14.00</Button>
         </Grid.Col>
       </Grid>
       <br />
@@ -87,9 +87,9 @@ export default function Home() {
           <br />
           <br />
           <br />
-          <Button onClick={open} radius={'xl'} size={'md'}>Single Pour $1.00</Button>
+          <Button onClick={open} radius={'xl'} size={'md'}>2 oz for $5.00</Button>
           <>&nbsp;&nbsp;&nbsp;&nbsp;</>
-          <Button onClick={open} radius={'xl'} size={'md'}>Double Pour $2.00</Button>
+          <Button onClick={open} radius={'xl'} size={'md'}>7 oz for $14.00</Button>
         </Grid.Col>
       </Grid>
     </div>
