@@ -1,6 +1,6 @@
 'use client';
-import { useDisclosure, useInputState, useSetState, useTimeout } from '@mantine/hooks';
-import { Badge , Button, Input, Image, Modal, Grid, TextInput } from "@mantine/core";
+import { useDisclosure, useInputState } from '@mantine/hooks';
+import { Badge , Button, Image, Modal, Grid, TextInput } from "@mantine/core";
 
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
