@@ -62,6 +62,10 @@ export default function Home() {
           <Button onClick={open} radius={'xl'} size={'md'}>Double Pour $2.00</Button>
         </Grid.Col>
       </Grid>
+      <br />
+      <br />
+      <br />
+      <br />
       <Grid align='center'>
         <Grid.Col span={6}>
           <Image
