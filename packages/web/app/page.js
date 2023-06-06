@@ -9,8 +9,11 @@ export default function Home() {
   const fetchUser = async (id) => {
     const res = await fetch(`https://api-iot-dev.sunitkulkarni.com/member/${id}`);
     if (res.status == 200) {
-      setPayMessage("Paid!")
+      let JSON = await res.json()
+      let familyName = JSON["familyName"]
+      setPayMessage(`Enjoy your drink ${familyName}!`)
       setTimeout(close, 4000)
+      setMemberId('')
      } else {
       setPayMessage("Invalid Member Id!")
       open()
