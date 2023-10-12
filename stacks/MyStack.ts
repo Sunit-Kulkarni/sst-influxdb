@@ -2,7 +2,10 @@ import { StackContext, Api, NextjsSite } from "sst/constructs";
 
 export function API({ stack }: StackContext) {
   const api = new Api(stack, "api", {
-    customDomain: "api-iot-dev.sunitkulkarni.com",
+    customDomain: {
+      domainName: process.env.API_DOMAIN_NAME,
+      hostedZone: process.env.HOSTED_ZONE,
+    },
     routes: {
       "GET /": "packages/functions/src/main.go",
       "POST /sensor": "packages/functions/lambdas/create/create.go",
@@ -13,19 +16,23 @@ export function API({ stack }: StackContext) {
     defaults: {
       function: {
         environment: {
+          // @ts-ignore
           INFLUXDB_TOKEN: process.env.INFLUXDB_TOKEN,
+          // @ts-ignore
           DATABASE_URL: process.env.DATABASE_URL
         }
       }
     }
   });
+
   const site = new NextjsSite(stack, "countryclub", {
     customDomain: {
-      domainName: "countryclub.sunitkulkarni.com",
-      hostedZone: "sunitkulkarni.com"
+      domainName: process.env.COUNTRY_CLUB_DOMAIN_NAME,
+      hostedZone: process.env.HOSTED_ZONE,
     },
     path: "packages/web"
   })
+
   stack.addOutputs({
     ApiEndpoint: api.url,
     URL: site.url,

@@ -8,12 +8,11 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
-	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
+	"github.com/InfluxCommunity/influxdb3-go/influxdb3"
 )
 
 func Batch(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
 	if err := dbWrite(context.Background()); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		return events.APIGatewayProxyResponse{
 			Body:       "Your POST batch request is invalid:" + err.Error(),
 			StatusCode: 400,
@@ -27,14 +26,17 @@ func Batch(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyRespon
 
 func dbWrite(ctx context.Context) error {
 	// Create write client
-	url := "https://us-east-1-1.aws.cloud2.influxdata.com"
+	url := os.Getenv("INFLUXDB_URL")
 	token := os.Getenv("INFLUXDB_TOKEN")
-	writeClient := influxdb2.NewClient(url, token)
-
-	// Define write API
-	org := "Dev Team"
-	bucket := "sample-iot-data"
-	writeAPI := writeClient.WriteAPIBlocking(org, bucket)
+	database := os.Getenv("INFLUXDB_DATABASE")
+	client, err := influxdb3.New(influxdb3.ClientConfig{
+		Host:     url,
+		Token:    token,
+		Database: database,
+	})
+	if err != nil {
+		return fmt.Errorf("could not setup InfluxDB v3 client: %s", err)
+	}
 
 	data := map[string]map[string]interface{}{
 		"point1": {
@@ -53,13 +55,13 @@ func dbWrite(ctx context.Context) error {
 
 	// Write data
 	for key := range data {
-		point := influxdb2.NewPointWithMeasurement("barrel").
+		point := influxdb3.NewPointWithMeasurement("barrel").
 			AddTag("ipAddress", data[key]["ipAddress"].(string)).
 			AddTag("barrelId", data[key]["ipAddress"].(string)).
 			AddTag("locationId", data[key]["locationId"].(string)).
 			AddField("temperature", data[key]["temperature"])
 
-		if err := writeAPI.WritePoint(ctx, point); err != nil {
+		if err := client.WritePoints(ctx, point); err != nil {
 			return fmt.Errorf("write API write point: %s", err)
 		}
 	}
